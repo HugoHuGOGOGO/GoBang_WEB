@@ -27,6 +27,14 @@
       width: 480px;
       height: 848px;
     }
+
+    @media screen and (max-width: 480px),
+    screen and (max-height: 848px) {
+      #unity-canvas {
+        width: 100vw;
+        height: calc(100vw * (848 / 480));
+      }
+    }
   </style>
 </head>
 
@@ -84,6 +92,14 @@
     if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
       container.className = "unity-mobile";
       config.devicePixelRatio = 1;
+
+      // Add extra logic for mobile devices to handle fixed resolution
+      canvas.style.width = "100vw";
+      canvas.style.height = "calc(100vw * (848 / 480))";
+    } else {
+      // For PC, use fixed resolution
+      canvas.style.width = "480px";
+      canvas.style.height = "848px";
     }
     loadingCover.style.display = "";
     const script = document.createElement("script");
